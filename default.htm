@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Effect.Wipe Demo</title>
+<script type="text/javascript" src="/JSLIB/prototype.js"></script>
+<script type="text/javascript" src="/JSLIB/scriptaculous.js"></script>
+<script type="text/javascript" src="wipe.js"></script>
+</head>
+
+<body>
+<div id="content"><img src="Images/Wipe1.jpg"></div>
+<h1>Effect.Wipe</h1>
+by James MacFarlane - diodeus * gmail . com
+<br /><br />
+<code>
+new Effect.Wipe('content',{'newImg':'Images/Wipe3.jpg',duration:2,mode:'vSplit'})
+</code>
+
+<br /><br /><a href="javascript://" onclick="resetWipe();new Effect.Wipe('content',{'newImg':'Images/Wipe3.jpg',duration:2,mode:'vSplit'})">Vertical split</a>
+<br /><a href="javascript://" onclick="resetWipe();new Effect.Wipe('content',{'newImg':'Images/Wipe3.jpg',duration:2,mode:'hSplit'})">Horizontal split</a>
+<br /><a href="javascript://" onclick="resetWipe();new Effect.Wipe('content',{'newImg':'Images/Wipe3.jpg',duration:2,mode:'toRight'})">Wipe right</a>
+<br /><a href="javascript://" onclick="resetWipe();new Effect.Wipe('content',{'newImg':'Images/Wipe3.jpg',duration:2,mode:'toLeft'})">Wipe left</a>
+<br /><a href="javascript://" onclick="resetWipe();new Effect.Wipe('content',{'newImg':'Images/Wipe3.jpg',duration:2,mode:'toTop'})">Wipe up</a>
+<br /><a href="javascript://" onclick="resetWipe();new Effect.Wipe('content',{'newImg':'Images/Wipe3.jpg',duration:2,mode:'toBottom'})">Wipe down</a>
+<br /><a href="javascript://" onclick="resetWipe();new Effect.Wipe('content',{'newImg':'Images/Wipe3.jpg',duration:2,mode:'flipRight'})">Page Flip</a>
+<br /><a href="javascript://" onclick="resetWipe();new Effect.Wipe('content',{'newImg':'Images/Wipe3.jpg',duration:2,mode:'hpanels',panels:10})">Horizontal panels</a>
+<br /><a href="javascript://" onclick="resetWipe();new Effect.Wipe('content',{'newImg':'Images/Wipe3.jpg',duration:2,mode:'vpanels',panels:20})">Vertical panels</a>
+<script type="text/javascript">
+function resetWipe() {
+	$('content').innerHTML = '<img src="Images/Wipe1.jpg">'
+}
+
+
+
+
+</script>
+<div id='debug'></div>
+
+</body>
+</html>
