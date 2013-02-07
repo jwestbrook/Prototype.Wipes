@@ -12,14 +12,9 @@ Effect.Wipe = function(element) {
 				panels		: 10
 				};
 	Object.extend(options,arguments[1]);
-//	var img = arguments[1].newImg || {}
-//	var wipeDuration = arguments[1].duration || 1
-//	var wipeMode = arguments[1].mode || 'vSplit'
-//	var wipeDelay = arguments[1].delay || 0.0
 	var oldImg = element.down('img').readAttribute('src')
 	var tempImg = new Image
 	tempImg.src = oldImg
-//	var panels = arguments[1].panels || 10
 	var wipeWidth=tempImg.width
 	var wipeHeight=tempImg.height
 	var wipeCenter = parseInt(wipeWidth/2)
@@ -167,7 +162,7 @@ Effect.Wipe = function(element) {
 				$('wipeRight').show()
 			},
 			afterFinish: function() {								
-				element.firstChild.src = options.newImg
+				element.down('img').writeAttribute('src',options.newImg)
 				$('wipeRight').remove()
 			}}
 		)
@@ -191,24 +186,22 @@ Effect.Wipe = function(element) {
 		var steps = 50
 		var vBars=Math.round(wipeWidth/steps)
 		var hBars=Math.round(wipeHeight/steps)
-		for(var x=0;x<steps;x++) {
+		$R(0,steps,true).each(function(x){
 			barHeight = hBars
-			if(x==steps-1) {				
+			if(x==steps-1) {
 				barHeight = barHeight + wipeHeight - (hBars*steps)
 			}
 			barLeft = (hBars*x)+(wipeWidth/3)
-			element.insert(new Element("div", { id: "wipeBar"+x, style:'position:absolute;top:'+hBars*x+'px;left:-'+barLeft+'px;z-index:10;overflow:hidden;width:'+vBars*x+'px;height:'+barHeight+'px;background-image:url('+options.newImg+');background-position:0px -'+hBars*x+'px;' }))	
-		}
+			element.insert(new Element("div", { id: "wipeBar"+x,'class':'wipeBars_hbars',style:'position:absolute;top:'+hBars*x+'px;left:-'+barLeft+'px;z-index:10;overflow:hidden;width:'+vBars*x+'px;height:'+barHeight+'px;background-image:url('+options.newImg+');background-position:0px -'+hBars*x+'px;' }))	
+		})
 		//return;
-		for(var x=0;x<steps-1;x++) {
+		$R(0,steps,true).each(function(x){
 			new Effect.Morph('wipeBar'+x,{queue: { scope: 'wipe' },style:'left:0px;width:'+wipeWidth+'px;background-position:0px 0px'})
-		}
+		})
 		new Effect.Morph('wipeBar'+(steps-1),{queue: { scope: 'wipe' },style:'left:0px;width:'+wipeWidth+'px;background-position:0px 0px',
 			afterFinish:function(){
-				element.firstChild.src = options.newImg
-				for(var x=0;x<steps;x++) {
-					$('wipeBar'+x).remove()
-				}
+				element.down('img').writeAttribute('src',options.newImg)
+				$$('.wipeBars_hbars').invoke('remove')
 			}
 		})
 	break;
@@ -216,25 +209,23 @@ Effect.Wipe = function(element) {
 		steps = options.panels
 		vBars=Math.round(wipeWidth/steps)
 		hBars=Math.round(wipeHeight/steps)
-		for(var x=0;x<steps;x++) {
+		$R(0,steps,true).each(function(x){
 			barHeight = hBars
 			if(x==steps-1) {				
 				barHeight = barHeight + wipeHeight - (hBars*steps)
 			}
 			barLeft = Math.round(Math.random()*wipeWidth)
-			element.insert(new Element("div", { id: "wipeBar"+x, style:'position:absolute;top:'+hBars*x+'px;left:-'+barLeft+'px;z-index:10;overflow:hidden;width:0px;height:'+barHeight+'px;background-image:url('+options.newImg+');background-position:0px -'+hBars*x+'px;' }))	
-		}
+			element.insert(new Element("div", { id: "wipeBar"+x,'class':'wipeBars_hbars', style:'position:absolute;top:'+hBars*x+'px;left:-'+barLeft+'px;z-index:10;overflow:hidden;width:0px;height:'+barHeight+'px;background-image:url('+options.newImg+');background-position:0px -'+hBars*x+'px;' }))	
+		});
 		//return;
-		for(var x=0;x<steps-1;x++) {
+		$R(0,steps,true).each(function(x){
 			new Effect.Morph('wipeBar'+x,{style:'left:0px;width:'+wipeWidth+'px;background-position:0px '+wipeWidth+'px'})
-		}
+		});
 		
 		new Effect.Morph('wipeBar'+(steps-1),{style:'left:0px;width:'+wipeWidth+'px;background-position:0px '+wipeWidth+'px',
 			afterFinish:function(){
-				element.firstChild.src = options.newImg
-				for(var x=0;x<steps;x++) {
-					$('wipeBar'+x).remove()
-				}
+				element.down('img').writeAttribute('src',options.newImg)
+				$$('.wipeBars_hbars').invoke('remove')
 			}
 		})
 
@@ -243,32 +234,29 @@ Effect.Wipe = function(element) {
 		steps = options.panels
 		vBars=Math.round(wipeWidth/steps)
 		hBars=Math.round(wipeHeight/steps)
-		for(var x=0;x<steps;x++) {
+		$R(0,steps,true).each(function(x){
 			barWidth = vBars
 			if(x==steps-1) {				
 				barWidth = barWidth + wipeWidth - (vBars*steps)
 			}
 			barLeft = Math.round(Math.random()*wipeWidth)
-			element.insert(new Element("div", { id: "wipeBar"+x, style:'position:absolute;left:'+vBars*x+'px;top:-'+barLeft+'px;z-index:10;overflow:hidden;height:0px;width:'+barWidth+'px;background-image:url('+options.newImg+');background-position:-'+vBars*x+'px 0px;' }))	
-		}
+			element.insert(new Element("div", { id: "wipeBar"+x,'class':'wipeBars_vbars',style:'position:absolute;left:'+vBars*x+'px;top:-'+barLeft+'px;z-index:10;overflow:hidden;height:0px;width:'+barWidth+'px;background-image:url('+options.newImg+');background-position:-'+vBars*x+'px 0px;' }))	
+		});
 		//return;
-		for(var x=0;x<steps-1;x++) {
-			new Effect.Morph('wipeBar'+x,{style:'top:0px;height:'+wipeHeight+'px;', afterUpdate:
-				function() {					
-					$('wipeBar'+x).style.backgroundPosition='background-position:'+wipeHeight+'px 0px'	
+		$R(0,(steps-1),true).each(function(x){
+			new Effect.Morph('wipeBar'+x,{style:'top:0px;height:'+wipeHeight+'px;', afterUpdate:function() {					
+					element.style.backgroundPosition='background-position:'+wipeHeight+'px 0px'
 				}
 			})
-		}
+		});
 		
 		new Effect.Morph('wipeBar'+(steps-1),{style:'top:0px;height:'+wipeHeight+'px;',
 			afterUpdate:function() {
-				$('wipeBar'+x).style.backgroundPosition='background-position:'+wipeHeight+'px 0px'	
+				element.style.backgroundPosition='background-position:'+wipeHeight+'px 0px'	
 			},
 			afterFinish:function(){
-				element.firstChild.src = options.newImg
-				for(var x=0;x<steps-1;x++) {
-					$('wipeBar'+x).remove()
-				}
+				element.down('img').writeAttribute('src',options.newImg)
+				$$('.wipeBars_vbars').invoke('remove')
 			}
 		})
 
