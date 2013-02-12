@@ -13,7 +13,7 @@ Effect.Wipe = function(element) {
 				};
 	Object.extend(options,arguments[1]);
 	var oldImg = element.down('img').readAttribute('src')
-	var tempImg = new Image
+	var tempImg = new Image()
 	tempImg.src = oldImg
 	var wipeWidth=tempImg.width
 	var wipeHeight=tempImg.height
